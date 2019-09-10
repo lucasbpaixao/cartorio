@@ -8,12 +8,11 @@ import com.lucas.models.Cartorio;
 @Repository
 public class CartorioDao {
 	
-	@Autowired
-	private CartorioRepository repository;
+
 	
 	public void cadastrar(Cartorio cartorio) {
-		System.out.println(cartorio.getNome());
-		repository.save(cartorio);
+		
+		
 
 	}
 }
