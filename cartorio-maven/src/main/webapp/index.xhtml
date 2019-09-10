@@ -15,6 +15,9 @@
 	<h:form>
 		<p:fieldset legend="Basic" style="margin-bottom:50px">
 			<h:panelGrid columns="2" cellpadding="5">
+			
+				<p:inputText id="inputNome"
+					value="#{cartorioController.mensagem}" disabled="true"/>
 				<h3>ID</h3>
 				 <p:inputNumber id="inputId" value="#{cartorioController.cartorio.id}" minValue="1" maxValue="1000">  
                       

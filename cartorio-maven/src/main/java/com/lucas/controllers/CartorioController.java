@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,13 +24,12 @@ public class CartorioController implements Serializable{
 	@Inject
 	private Cartorio cartorio;
 	
+	@Default
+	private String mensagem;
 	
-	public String cadastrar() {
-		String retorno = HttpService.cadastra(cartorio);
-		
+	public void cadastrar() {
+		mensagem = HttpService.cadastra(cartorio);
 		limpar();
-
-		return retorno; 
 	}
 	
 
@@ -43,6 +43,16 @@ public class CartorioController implements Serializable{
 
 	public void setCartorio(Cartorio cartorio) {
 		this.cartorio = cartorio;
+	}
+
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
 
