@@ -5,11 +5,15 @@ import javax.persistence.PersistenceContext;
 
 import com.lucas.models.Cartorio;
 
+
 public class CartorioDao {
 	@PersistenceContext
-	private static EntityManager em;
+	private EntityManager em;
 	
-	public static void cadastrar(Cartorio cartorio) {
+	public void cadastrar(Cartorio cartorio) {
+		em.getTransaction().begin();
 		em.persist(cartorio);
+		em.getTransaction().commit();
+		em.close();
 	}
 }

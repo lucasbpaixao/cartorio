@@ -19,7 +19,8 @@ public class RequestController {
 		cartorio.setId(Integer.parseInt(id));
 		cartorio.setNome(nome);
 		
-		CartorioDao.cadastrar(cartorio);
+		CartorioDao dao = new CartorioDao();
+		dao.cadastrar(cartorio);
 		
 		return "Cadastro efetuado com Sucesso"; 
 
