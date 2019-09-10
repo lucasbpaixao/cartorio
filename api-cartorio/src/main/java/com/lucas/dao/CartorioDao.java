@@ -1,19 +1,19 @@
 package com.lucas.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.lucas.models.Cartorio;
 
-
+@Repository
 public class CartorioDao {
-	@PersistenceContext
-	private EntityManager em;
+	
+	@Autowired
+	private CartorioRepository repository;
 	
 	public void cadastrar(Cartorio cartorio) {
-		em.getTransaction().begin();
-		em.persist(cartorio);
-		em.getTransaction().commit();
-		em.close();
+		System.out.println(cartorio.getNome());
+		repository.save(cartorio);
+
 	}
 }
