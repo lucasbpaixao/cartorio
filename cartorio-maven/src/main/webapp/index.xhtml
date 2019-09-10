@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+
+
+	<h:form>
+		<p:fieldset legend="Basic" style="margin-bottom:50px">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h3>ID</h3>
+				<p:inputText id="inputId" value="#{cartorioController.cartorio.id}" />
+
+				<h3>Nome</h3>
+
+				<p:inputText id="inputNome"
+					value="#{cartorioController.cartorio.nome}" />
+
+				<br />
+				<br />
+
+
+
+				<p:commandButton value="Alterar Cartório" id="nonAjax"
+					action="#{cartorioController.cadastrar}" style="margin-right:20px;">
+
+					<p:commandButton value="Cadastrar Cartório" id="ajax"
+						action="#{cartorioController.cadastrar}"
+						style="margin-right:20px;" styleClass="ui-priority-primary" />
+
+				</p:commandButton>
+
+
+
+			</h:panelGrid>
+		</p:fieldset>
+
+	</h:form>
+
+	<p:dataTable var="cartorio" value="">
+		<p:column headerText="Id">
+			<h:outputText value="" />
+		</p:column>
+
+		<p:column headerText="Nome">
+			<h:outputText value="" />
+		</p:column>
+
+		<p:column headerText="Excluir">
+			<p:commandButton value="Excluir" id="excluir"
+						action="#{cartorioController.cadastrar}"
+						style="margin-right:20px;" styleClass="ui-priority-primary" />
+		</p:column>
+
+		<p:column headerText="Visualizar">
+			<p:commandButton value="Visualizar" id="visualizar"
+						action="#{cartorioController.cadastrar}"
+						style="margin-right:20px;" styleClass="ui-priority-primary" />
+		</p:column>
+	</p:dataTable>
+
+</h:body>
+
+</html>
