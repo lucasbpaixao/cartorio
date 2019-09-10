@@ -40,15 +40,15 @@ public class HttpService {
 		    HttpEntity entity = response.getEntity();
 		    String content = EntityUtils.toString(entity);
 		    System.out.println( content );
+		    
+		    return content;
 		             
 		} catch (ClientProtocolException e) {
-		    //e.printStackTrace();
+		    e.printStackTrace();
 		} catch (IOException e) {
-		    //e.printStackTrace();
-		} finally {
-		   // httppost.releaseConnection();;
+		    e.printStackTrace();
 		}
-		return null;
+		return "Tivemos um problema!!!";
 	}
 	
 	public static String alterar(Cartorio cartorio) {
