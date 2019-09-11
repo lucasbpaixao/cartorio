@@ -48,12 +48,12 @@ public class RequestController {
 
 	}
 	
-	@RequestMapping(value = "excluir-cartorio/{id}")
-	public String excluirProduto(@PathVariable(value = "id") Integer id) {
+	@RequestMapping(value = "api/excluir-cartorio")
+	public String excluirProduto(@RequestParam("id") String id) {
 		
-		repository.delete(id);
+		repository.delete(Integer.parseInt(id));
 
-		return "redirect:/cadastroProdutos";
+		return "Cartorio excluido com sucesso";
 	}
 	
 	

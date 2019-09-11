@@ -51,8 +51,7 @@ public class CartorioController implements Serializable {
 	}
 	
 	public void excluir() {
-		Integer id = cartorio.getId();
-		HttpService.excluir(id);
+		HttpService.excluir(cartorio);
 		listar();
 		limpar();
 	}

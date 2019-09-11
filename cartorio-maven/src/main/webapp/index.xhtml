@@ -36,11 +36,24 @@
 
 
 				<p:commandButton value="Alterar Cartório" id="nonAjax"
-					action="#{cartorioController.cadastrar}" style="margin-right:20px;">
+					style="margin-right:20px;">
+					
+					<f:ajax listener="#{cartorioController.cadastrar}" execute="@all"
+							render="@all" event="click" />
 
 					<p:commandButton value="Cadastrar Cartório" id="ajax"
-						action="#{cartorioController.alterar}"
-						style="margin-right:20px;" styleClass="ui-priority-primary" />
+						style="margin-right:20px;" styleClass="ui-priority-primary">
+						<f:ajax listener="#{cartorioController.alterar}" execute="@all"
+							render="@all" event="click" />
+
+						<p:commandButton value="Excluir" id="excluir"
+							style="margin-right:20px;" styleClass="ui-priority-primary">
+							<f:ajax listener="#{cartorioController.excluir}" execute="@all"
+								render="@all" event="click" />
+						</p:commandButton>
+					</p:commandButton>
+
+
 
 				</p:commandButton>
 
@@ -58,17 +71,6 @@
 			<h:outputText value="#{cartorio.nome}" />
 		</p:column>
 
-		<p:column headerText="Excluir">
-			<p:commandButton value="Excluir" id="excluir"
-				action="#{cartorioController.excluir}" style="margin-right:20px;"
-				styleClass="ui-priority-primary" />
-		</p:column>
-
-		<p:column headerText="Visualizar">
-			<p:commandButton value="Visualizar" id="visualizar"
-				action=" #{cartorioController.cadastrar}" style="margin-right:20px;"
-				styleClass="ui-priority-primary" />
-		</p:column>
 	</p:dataTable>
 
 </h:body>

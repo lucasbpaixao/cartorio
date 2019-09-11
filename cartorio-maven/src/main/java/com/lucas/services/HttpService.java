@@ -82,36 +82,30 @@ public class HttpService {
 		return "Tivemos um problema!!!";
 	}
 	
-	public static String excluir(Integer id) {
+	public static String excluir(Cartorio cartorio) {
 		HttpClient httpclient = HttpClients.createDefault();
         
-		HttpGet httpget = new HttpGet("http://localhost:9000/api/excluir-cartorio/"+id);
+		HttpPost httppost = new HttpPost("http://localhost:9000/api/excluir-cartorio");
 		         
-		HttpHost proxy = new HttpHost("localhost", 9000, "http");
-		         
-		RequestConfig config = RequestConfig.custom().setProxy( proxy ).build();
-		         
-		httpget.setConfig(config);
-			         
-		try {
-		    HttpResponse resposta = httpclient.execute(httpget);
-		    HttpEntity entity = resposta.getEntity();
+		try { 
+		    ArrayList<NameValuePair> valores = new ArrayList<NameValuePair>();
+		    valores.add(new BasicNameValuePair("id", String.valueOf(cartorio.getId())));
+		             
+		    httppost.setEntity( new UrlEncodedFormEntity( valores ) );
+		    HttpResponse response = httpclient.execute( httppost );
+		              
+		    HttpEntity entity = response.getEntity();
 		    String content = EntityUtils.toString(entity);
+		    System.out.println( content );
 		    
-		    System.out.println(content);
-		    
-		    return "Cartorio excluido com sucesso!!!";
-		    
-		 
+		    return content;
+		             
 		} catch (ClientProtocolException e) {
 		    e.printStackTrace();
 		} catch (IOException e) {
 		    e.printStackTrace();
-		} finally {
-		    httpget.releaseConnection();;
 		}
-		
-		return "Tivemos um Problema";
+		return "Tivemos um problema!!!";
 	}
 	
 	public static List<Cartorio> listar() {
