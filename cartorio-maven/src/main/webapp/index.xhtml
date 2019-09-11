@@ -15,13 +15,15 @@
 	<h:form>
 		<p:fieldset legend="Basic" style="margin-bottom:50px">
 			<h:panelGrid columns="2" cellpadding="5">
-			
-				<p:inputText id="inputNome"
-					value="#{cartorioController.mensagem}" disabled="true"/>
+
+
+
 				<h3>ID</h3>
-				 <p:inputNumber id="inputId" value="#{cartorioController.cartorio.id}" minValue="1" maxValue="1000">  
-                      
-                </p:inputNumber> 
+				<p:inputNumber id="inputId"
+					value="#{cartorioController.cartorio.id}" minValue="1"
+					maxValue="1000">
+				</p:inputNumber>
+
 
 				<h3>Nome</h3>
 
@@ -37,37 +39,35 @@
 					action="#{cartorioController.cadastrar}" style="margin-right:20px;">
 
 					<p:commandButton value="Cadastrar Cartório" id="ajax"
-						action="#{cartorioController.cadastrar}"
+						action="#{cartorioController.alterar}"
 						style="margin-right:20px;" styleClass="ui-priority-primary" />
 
 				</p:commandButton>
-
-
 
 			</h:panelGrid>
 		</p:fieldset>
 
 	</h:form>
 
-	<p:dataTable var="cartorio" value="">
+	<p:dataTable var="cartorio" value="#{cartorioController.cartorios}">
 		<p:column headerText="Id">
-			<h:outputText value="" />
+			<h:outputText value="#{cartorio.id}" />
 		</p:column>
 
 		<p:column headerText="Nome">
-			<h:outputText value="" />
+			<h:outputText value="#{cartorio.nome}" />
 		</p:column>
 
 		<p:column headerText="Excluir">
 			<p:commandButton value="Excluir" id="excluir"
-						action="#{cartorioController.cadastrar}"
-						style="margin-right:20px;" styleClass="ui-priority-primary" />
+				action="#{cartorioController.excluir}" style="margin-right:20px;"
+				styleClass="ui-priority-primary" />
 		</p:column>
 
 		<p:column headerText="Visualizar">
 			<p:commandButton value="Visualizar" id="visualizar"
-						action="#{cartorioController.cadastrar}"
-						style="margin-right:20px;" styleClass="ui-priority-primary" />
+				action=" #{cartorioController.cadastrar}" style="margin-right:20px;"
+				styleClass="ui-priority-primary" />
 		</p:column>
 	</p:dataTable>
 
