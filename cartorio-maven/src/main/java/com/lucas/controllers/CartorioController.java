@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.http.HttpResponse;
+import org.primefaces.event.SelectEvent;
 
 import com.lucas.models.Cartorio;
 import com.lucas.services.HttpService;
@@ -29,33 +30,58 @@ public class CartorioController implements Serializable {
 
 	@Default
 	private List<Cartorio> cartorios;
+	
+	@Default
+	private String mensagem;
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
 
 	public void listar() {
 		
 	}
 	
-	public void excluir(int id) {
+	public void cadastrar() {
+		
+		if(cartorio.getNome().equals("") || cartorio.getNome() == null) {
+			mensagem = "O campo nome não pode ser vazio";
+			return;
+		}
+		mensagem = HttpService.cadastra(cartorio);
+		listar();
+		limpar();
 		
 	}
 	
-	public void cadastrar() {
-		HttpService.cadastra(cartorio);
-		listar();
-		limpar();
-	}
-	
 	public void alterar() {
-		HttpService.alterar(cartorio);
+		
+		if(cartorio.getNome().equals("") || cartorio.getNome() == null || cartorio.getId() == null || cartorio.getId() == 0) {
+			mensagem = "Na função alterar todos campos devem ser preenchidos";
+			return;
+		}
+		
+		mensagem = HttpService.alterar(cartorio);
 		listar();
 		limpar();
 	}
 	
 	public void excluir() {
-		HttpService.excluir(cartorio);
+		
+		if(cartorio.getId() == null) {
+			mensagem = "O campo id não pode ser vazio";
+			return;
+		}
+		
+		mensagem = HttpService.excluir(cartorio);
 		listar();
 		limpar();
 	}
-
+	
 	public List<Cartorio> getCartorios() {
 		return cartorios =  HttpService.listar();
 	}

@@ -47,12 +47,10 @@ public class HttpService {
 		    
 		    return content;
 		             
-		} catch (ClientProtocolException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Tivemos um problema, verifique a conexão e as configurações do banco de dados";
 		}
-		return "Tivemos um problema!!!";
 	}
 	
 	public static String alterar(Cartorio cartorio) {
@@ -74,38 +72,34 @@ public class HttpService {
 		    
 		    return content;
 		             
-		} catch (ClientProtocolException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+			return "Tivemos um problema, verifique a conexão e as configurações do banco de dados";
 		}
-		return "Tivemos um problema!!!";
 	}
 	
 	public static String excluir(Cartorio cartorio) {
 		HttpClient httpclient = HttpClients.createDefault();
         
 		HttpPost httppost = new HttpPost("http://localhost:9000/api/excluir-cartorio");
+		
 		         
 		try { 
 		    ArrayList<NameValuePair> valores = new ArrayList<NameValuePair>();
 		    valores.add(new BasicNameValuePair("id", String.valueOf(cartorio.getId())));
 		             
 		    httppost.setEntity( new UrlEncodedFormEntity( valores ) );
-		    HttpResponse response = httpclient.execute( httppost );
+		    HttpResponse resposta = httpclient.execute( httppost );
 		              
-		    HttpEntity entity = response.getEntity();
-		    String content = EntityUtils.toString(entity);
-		    System.out.println( content );
+		    HttpEntity entity = resposta.getEntity();
+		    String feedback = EntityUtils.toString(entity);
 		    
-		    return content;
+		    return feedback;
 		             
-		} catch (ClientProtocolException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Tivemos um problema, verifique a conexão e as configurações do banco de dados";
 		}
-		return "Tivemos um problema!!!";
 	}
 	
 	public static List<Cartorio> listar() {
@@ -120,7 +114,7 @@ public class HttpService {
 		httpget.setConfig(config);
 		
 		
-	    TypeToken tt = new TypeToken<List<Cartorio>>() {
+	    TypeToken typeToken = new TypeToken<List<Cartorio>>() {
 	    };
 
 		
@@ -132,17 +126,13 @@ public class HttpService {
 		    Gson gson = new Gson();
 		    
 		    HttpEntity entity = resposta.getEntity();
-		    String content = EntityUtils.toString(entity);
+		    String cartorioString = EntityUtils.toString(entity);
 		    
-		    System.out.println(content);
-		    
-		    cartorios = gson.fromJson(content, tt.getType());
+		    cartorios = gson.fromJson(cartorioString, typeToken.getType());
 		    
 		    return cartorios;
 		 
-		} catch (ClientProtocolException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 		    e.printStackTrace();
 		} finally {
 		    httpget.releaseConnection();;
@@ -151,22 +141,4 @@ public class HttpService {
 		return cartorios;
 	}
 	
-	public static Cartorio visualizarCartorio(Integer id) {
-		HttpClient httpclient = HttpClients.createDefault();
-		HttpPost httpget = new HttpPost("http://localhost:3000/api/visualizar-cartorio" + id);
-		try {
-		    HttpResponse resposta = httpclient.execute(httpget);
-		 
-		    
-		 
-		} catch (ClientProtocolException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		} finally {
-		    httpget.releaseConnection();;
-		}
-		
-		return null;
-	}
 }

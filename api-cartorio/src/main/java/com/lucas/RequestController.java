@@ -49,7 +49,7 @@ public class RequestController {
 	}
 	
 	@RequestMapping(value = "api/excluir-cartorio")
-	public String excluirProduto(@RequestParam("id") String id) {
+	public @ResponseBody String excluirProduto(@RequestParam("id") String id) {
 		
 		repository.delete(Integer.parseInt(id));
 

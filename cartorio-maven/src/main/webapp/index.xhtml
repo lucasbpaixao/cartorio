@@ -7,13 +7,16 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Insert title here</title>
+	<title>Cadastro de Cartorio</title>
 </h:head>
 <h:body>
 
 
 	<h:form>
-		<p:fieldset legend="Basic" style="margin-bottom:50px">
+		<p:fieldset legend="Cadastro de Cartorio" style="margin-bottom:50px">
+
+			<h:outputLabel value="#{cartorioController.mensagem}"></h:outputLabel>
+
 			<h:panelGrid columns="2" cellpadding="5">
 
 
@@ -35,20 +38,23 @@
 
 
 
-				<p:commandButton value="Alterar Cartório" id="nonAjax"
-					style="margin-right:20px;">
-					
-					<f:ajax listener="#{cartorioController.cadastrar}" execute="@all"
-							render="@all" event="click" />
+				<p:commandButton value="Excluir" id="excluir"
+					style="margin-right:20px;" styleClass="ui-priority-primary">
 
-					<p:commandButton value="Cadastrar Cartório" id="ajax"
-						style="margin-right:20px;" styleClass="ui-priority-primary">
+
+					<f:ajax listener="#{cartorioController.excluir}" execute="@all"
+						render="@all" event="click" />
+
+					<p:commandButton value="Alterar Cartório" id="alterar"
+						style="margin-right:20px;">
 						<f:ajax listener="#{cartorioController.alterar}" execute="@all"
 							render="@all" event="click" />
 
-						<p:commandButton value="Excluir" id="excluir"
+
+
+						<p:commandButton value="Cadastrar Cartório" id="cadastrar"
 							style="margin-right:20px;" styleClass="ui-priority-primary">
-							<f:ajax listener="#{cartorioController.excluir}" execute="@all"
+							<f:ajax listener="#{cartorioController.cadastrar}" execute="@all"
 								render="@all" event="click" />
 						</p:commandButton>
 					</p:commandButton>
@@ -63,6 +69,7 @@
 	</h:form>
 
 	<p:dataTable var="cartorio" value="#{cartorioController.cartorios}">
+	
 		<p:column headerText="Id">
 			<h:outputText value="#{cartorio.id}" />
 		</p:column>
